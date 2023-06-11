@@ -1,4 +1,4 @@
-// Union
+// Union - это тип, который может быть одним из нескольких значений
 function logId(id: number | string) {
   console.log(id)
     if (typeof id === 'string') {
