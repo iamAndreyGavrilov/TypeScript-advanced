@@ -12,6 +12,8 @@
 // }
 // =====================================================================================================================
 
+// TODO: Generic в функциях
+
 function logMiddleWare<T>(data: T): T {
     console.log(data)
     return data
@@ -28,5 +30,25 @@ function getSplitedArr<T>(data: Array<T>):Array<T> {
 const spliteArr = getSplitedArr([1,2,3,4,5,6,7,8,9,10]) // [1,2,3,4,5]
 const spliteArr2 = getSplitedArr(['1','2','3','4','5']) // ['1','2','3']
 
+const split: <T>(data: Array<T>) => Array<T> = getSplitedArr // указываем тип данных, который мы передаем в функцию
 // =====================================================================================================================
 
+// TODO: Generic в типах
+
+
+interface ILogLine<T> {
+    timeStamp: Date,
+    data: T
+}
+
+type LogLineType<T> = {
+    timeStamp: Date,
+    data: T
+}
+
+const logLine: LogLineType<{ a:number }> = {
+    timeStamp: new Date(),
+    data: {
+        a: 1,
+    }
+}
