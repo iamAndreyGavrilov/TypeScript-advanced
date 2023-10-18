@@ -79,3 +79,34 @@ class LCV extends Vehicle {
 const vehicle = kmToMiles(new Vehicle(100))
 const lcv = kmToMiles(new LCV(100, 1000))
 // const test = kmToMiles({ bug: 1000 }) // error - так как не наследуется от Vehicle
+
+// =====================================================================================================================
+
+// TODO: Generic в классах
+class Resp<D, E> {
+    data?: D
+    error?: E
+
+    constructor(data?: D, error?: E) {
+        if (data) {
+            this.data = data
+        }
+        if (error) {
+            this.error = error
+        }
+    }
+}
+
+const resp = new Resp<string, number>('data', 500)
+const resp2 = new Resp<string, number>('data')
+
+class HTTPResp<F> extends Resp<string, number> {
+    status: F
+
+    constructor(status: F, data?: string, error?: number) {
+        super(data, error)
+        this.status = status
+    }
+}
+
+const httpResp = new HTTPResp<number>(200, 'data', 500)
