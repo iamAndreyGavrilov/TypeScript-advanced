@@ -35,7 +35,6 @@ const split: <T>(data: Array<T>) => Array<T> = getSplitedArr // указывае
 
 // TODO: Generic в типах
 
-
 interface ILogLine<T> {
     timeStamp: Date,
     data: T
@@ -52,3 +51,31 @@ const logLine: LogLineType<{ a:number }> = {
         a: 1,
     }
 }
+// =====================================================================================================================
+
+//TODO: Ограничение generic c помощью extends
+class Vehicle {
+    run: number
+
+    constructor(run: number) {
+        this.run = run
+    }
+}
+
+function kmToMiles<T extends Vehicle>(vehicle: T): T {
+    vehicle.run = vehicle.run / 0.62
+    return vehicle
+}
+
+class LCV extends Vehicle {
+    capacity: number
+
+    constructor(run: number, capacity: number) {
+        super(run)
+        this.capacity = capacity
+    }
+}
+
+const vehicle = kmToMiles(new Vehicle(100))
+const lcv = kmToMiles(new LCV(100, 1000))
+// const test = kmToMiles({ bug: 1000 }) // error - так как не наследуется от Vehicle
